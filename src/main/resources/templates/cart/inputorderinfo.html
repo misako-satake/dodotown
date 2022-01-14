@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="ja" xmlns:th="http://www.thymeleaf.org">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+ <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/forheader.css}">
+	<link rel="stylesheet" th:href="@{/css/forshoppingcart.css}">
+<!-- Font Awesome -->
+	<link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
+
+<title>ショッピングカート -DODOTOWN</title>
+</head>
+<body>
+<i th:insert="/header/header::header"></i> 
+	<br>
+	<h1 id="arigato">ARIGATO!</h1>
+	<h2>ご注文ありがとうございます</h2>
+	<h3>お届けに必要な情報をすべてご入力ください</h3>
+	
+	
+	<form th:action="@{/order/toOrderComplete}">
+	
+	お名前&nbsp;&nbsp;<input type="text" placeholder="姓">&nbsp;<input type="text" placeholder="名"><br>
+	郵便番号&nbsp;&nbsp;<input type="text" placeholder=""><br>
+	住所&nbsp;&nbsp;<input type="text"><br>
+	お届け予定日<br>
+	支払い方法&nbsp;&nbsp;<div>クレジット</div>
+	<button>変更</button><br>
+	カード番号&nbsp;&nbsp;<input type="number" placeholder="半角数字のみ（ハイフンなし）"><br>
+	セキュリティコード&nbsp;&nbsp;<input type="number" placeholder="半角数字のみ"><br>
+	有効期限&nbsp;&nbsp;<input type="month"><br>
+	支払い方法&nbsp;&nbsp;
+	<select>
+	<option>一括払い</option>
+	<option>2回払い</option>
+	<option>3回払い</option>
+	</select>
+	
+	
+
+			<span>商品合計</span>
+			<span>&yen;</span>
+			<span th:text="${#numbers.formatInteger(session.totalpriceincart,1,'COMMA')}"></span>
+
+	<hr>
+	<br>
+	<button type="submit">同意して決定する</button>
+	</form>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>	
+</body>
+</html>

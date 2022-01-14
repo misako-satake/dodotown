@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="ja" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+ <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	 <link rel="stylesheet" th:href="@{/css/forheader.css}">
+
+<link type="text/css" rel="stylesheet"
+  	href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css" />
+	<link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
+
+<title>商品詳細画面</title>
+<link th:href="@{/css/foritemdetail.css}" rel="stylesheet" />
+<!-- <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/> -->
+<link rel=“stylesheet” href=“https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css”>
+<script src=“https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js”></script>
+</head>
+<body>
+<span th:insert="/header/header::header"></span> 
+	<br>
+
+<span th:each="items:${item}">
+<h1 th:text="${items.shopName}" id="shopname"></h1>
+</span>
+
+<div class="container-fluid">
+<div class="row">
+	 <div class="col-6">
+		<div th:each="items:${item}">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" th:each="imagepath : ${items.itemimageslist}" id="showitems">
+							<span><img th:src="@{/image/} + ${imagepath.imagePath}"
+								height="20%" id="itemimage" width="200"/>
+							</span>
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-prev"></div>
+	  			<div class="swiper-button-next"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-6">
+		<div th:object="${orderForm}">
+			<div th:each="items:${item}">
+						<div th:text="${items.shopName}"></div>
+						<br>
+						<h2 th:text="${items.itemName}"></h2>
+						<br>
+						<div th:text="${#numbers.formatInteger(items.itemPrice,1,'COMMA')}+円（税込）"></div>
+						<br>
+						<div th:text="${items.itemColor}"></div>
+						<br>【サイズ】
+						<hr>
+	
+				    <div  th:each="size:${items.itemsizelist}">
+						<form th:action="@{/cart/order}" method="post">
+					  <div class="row">
+					    <div class="col">
+					    	<span th:text="${size.sizeName}" id="sizename"></span>
+						</div>
+						<div class="col">
+							<div ></div>
+							<button th:if="${stockzero}==null" type="submit" class="btn btn-info d-grid gap-2" id="cartbutton" name="itemSize" th:value="${size.sizeName}">カートに入れる</button>
+							<div th:text="${stockzero}"></div>
+							
+							<input type="hidden">
+				  	  </div><hr>
+				    </div>
+					<input type="hidden" name="itemId" th:value="${items.goodsId}">
+					<input type="hidden" name="itemPrice" th:value="${items.itemPrice}">
+					<input type="hidden" name="itemColor" th:value="${items.itemColor}">
+					<input type="hidden" name="itemName" th:value="${items.itemName}">
+					<input type="hidden" name="shopName" th:value="${items.shopName}"> 
+					<input type="hidden" name="userEmail" th:unless="${session.userId}==null" th:value="${session.emailAddress}">
+					<input type="hidden" name="itemimageslist" th:value="${items.itemimageslist}">
+						</form>
+					<input type="hidden" id="itemtolocalstrage">
+					
+					</div>
+					<br>【アイテム説明】
+					<div th:text="${items.itemDescription}"></div>
+	</div>	
+</div>
+</div>	
+</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript"
+	  src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript"
+	  src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/localStrage.js}"></script>
+<script type="text/javascript" src="js/swiper.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+ <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ 	 <link rel="stylesheet" th:href="@{/css/fortoppage.css}">
+ 	 <link rel="stylesheet" th:href="@{/css/forheader.css}">
+ 	 
+ <!-- Font Awesome -->
+	<link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
+ 
+ 
+<title>ファッション通販DODOTOWN</title>
+</head>
+<body>
+ 	<i th:insert="/header/header::header"></i> 
+
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img th:src="@{/image/fordodotop.png}" alt="First slide" class="d-block w-100">
+     </div>
+    <div class="carousel-item">
+      <img th:src="@{/image/huku.jpg}" alt="Second slide" class="d-block w-100">
+      </div>
+    <div class="carousel-item">
+      <img th:src="@{/image/fortoppage_1.png}" alt="Third slide" class="d-block w-100">
+      </div>
+     <button class="carousel-control-prev" data-bs-target="#carouselExampleControls" type="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next"data-bs-target="#carouselExampleControls" type="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  </div>
+  
+<div class="underscreen">
+	  <div class="container con-left">
+	  	<div class="row">
+	  	<div class="col">
+			  <div>探す</div><br>
+			  <a th:href="@{/itemlist/toSearchByShop}">ブランドから探す</a><br>
+			  公式ショップから探す<br>
+			  <hr>
+			  <div>カテゴリー</div><br>
+			  <ul>
+			  	<li>トップス</li>
+			  	<li>ボトム</li>
+			  	<li>アウター</li>
+			  	<li>シューズ</li>
+			  </ul>
+			  
+		</div>
+		</div>
+	  </div>
+	  
+			  
+  
+  	  <div class="container con-right">
+  	  	<div class="row">
+	  	<div class="col">
+			  <div>
+			  <h3>お気に入りブランドの人気アイテム</h3>
+			  </div>
+			  <div>お気に入りしたブランドはありません</div>
+			  <br>
+			  <div>
+			  <h3>チェックしたアイテム</h3>
+			  	<div id="checkeditem">最近チェックしたアイテムはありません
+			  	</div>
+			  </div>
+			  <br>
+			  <div>
+			  <h3>世代別アイテムランキング</h3>
+			  </div>
+			  <br>
+			  
+		</div>
+		</div>
+	  </div>
+	  
+	  
+</div>  
+
+
+<!-- jQuery読み込み -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<!-- PopperのJS読み込み -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<!-- BootstrapのJS読み込み -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+<script th:src="@{/js/localStrage.js}"></script>
+</body>
+</html>

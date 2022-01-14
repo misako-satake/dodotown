@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.ItemMapper">
+
+    <resultMap type="com.example.demo.domain.Item" id="itemMap">
+        <id column="item_id" property="itemId"/>
+        <result column="item_price" property="itemPrice"/>
+        <result column="item_color" property="itemColor"/>
+        <result column="item_name" property="itemName"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="item_description" property="itemDescription"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="gender" property="gender"/>
+        <result column="stock_count" property="stockCount"/>
+        <collection property="itemimageslist" resultMap="itemimagesMap"/>
+        <collection property="itemsizejunclist" resultMap="itemsizejuncMap"/>
+        <collection property="itemsizelist" resultMap="itemsizeMap"/>
+    </resultMap>
+    
+    <resultMap type="com.example.demo.domain.Itemimages" id="itemimagesMap">
+    	<result column="image_goods_id" property="goodsId"/>
+    	<result column="image_id" property="id"/>
+    	<result column="image_image_path" property="imagePath"/>
+    </resultMap>
+    
+    <resultMap type="com.example.demo.domain.ItemSize" id="itemsizeMap">
+    	<id column="size_id" property="sizeId"/>
+    	<result column="size_name" property="sizeName"/>
+    </resultMap>
+    
+    <resultMap type="com.example.demo.domain.ItemSizeJunc" id="itemsizejuncMap">
+    	<id column="junc_goods_id" property="juncGoodsId"/>
+    	<result column="id" property="id"/>
+    	<result column="junc_size_id" property="juncSizeId"/>
+    </resultMap>
+    
+    
+    <select id="findByItems" resultMap="itemMap">
+        select 
+        	i.item_id,
+        	i.item_price,
+        	i.item_color,
+        	i.item_name,
+        	i.shop_name,
+        	i.item_description,
+        	i.goods_id,
+        	i.gender,
+        	i.deleted,
+        	i.stock_count,
+        	g.goods_id as image_goods_id,
+        	g.image_path as image_image_path,
+        	j.id as junc_id,
+        	j.junc_goods_id,
+        	j.junc_size_id,
+        	s.size_id,
+        	s.size_name
+        from items as i 
+        left join itemimages as g ON i.goods_id=g.goods_id
+        left join itemsizejunc  as j ON i.goods_id=j.junc_goods_id
+        left join itemsize  as s ON j.junc_size_id=s.size_id;
+    </select>
+    
+    <select id="findItemsByKeywords" resultMap="itemMap">
+     select 
+        	i.item_id,
+        	i.item_price,
+        	i.item_color,
+        	i.item_name,
+        	i.shop_name,
+        	i.item_description,
+        	i.goods_id,
+        	i.gender,
+        	i.deleted,
+        	i.stock_count,
+        	g.goods_id as image_goods_id,
+        	g.image_path as image_image_path,
+        	j.id as junc_id,
+        	j.junc_goods_id,
+        	j.junc_size_id,
+        	s.size_id,
+        	s.size_name
+        from items as i 
+        left join itemimages as g ON i.goods_id=g.goods_id
+        left join itemsizejunc  as j ON i.goods_id=j.junc_goods_id
+        left join itemsize  as s ON j.junc_size_id=s.size_id WHERE
+        
+          <foreach collection="keywords" item="keyword" open="(" close=")" index="i" separator="" >
+	        <choose>
+	            <when test="i == 0">
+	                (i.item_name LIKE '%${keyword}%')
+	            </when>
+	            <otherwise>
+	                OR (i.item_name LIKE '%${keyword}%')
+	            </otherwise>
+	        </choose>
+	        </foreach>
+	        or
+	        <foreach collection="keywords" item="keyword" open="(" close=")" index="i" separator="" >
+	        <choose>
+	            <when test="i == 0">
+	                (i.item_description LIKE '%${keyword}%')
+	            </when>
+	            <otherwise>
+	                OR (i.item_description LIKE '%${keyword}%')
+	            </otherwise>
+	        </choose>
+      	 </foreach> 
+    </select>
+    
+     <select id="findAllNamesOfName" resultMap="itemMap">
+       select 
+        	i.item_id,
+        	i.item_price,
+        	i.item_color,
+        	i.item_name,
+        	i.shop_name,
+        	i.item_description,
+        	i.goods_id,
+        	i.gender,
+        	i.deleted,
+        	i.stock_count,
+        	g.goods_id as image_goods_id,
+        	g.image_path as image_image_path,
+        	j.id as junc_id,
+        	j.junc_goods_id,
+        	j.junc_size_id,
+        	s.size_id,
+        	s.size_name
+        from items as i 
+        left join itemimages as g ON i.goods_id=g.goods_id
+        left join itemsizejunc  as j ON i.goods_id=j.junc_goods_id
+        left join itemsize  as s ON j.junc_size_id=s.size_id;
+    </select>
+    
+    <select id="findItemsOfShopByKeywords" resultMap="itemMap">
+     select 
+        	i.item_id,
+        	i.item_price,
+        	i.item_color,
+        	i.item_name,
+        	i.shop_name,
+        	i.item_description,
+        	i.goods_id,
+        	i.gender,
+        	i.deleted,
+        	i.stock_count,
+        	g.goods_id as image_goods_id,
+        	g.image_path as image_image_path,
+        	j.id as junc_id,
+        	j.junc_goods_id,
+        	j.junc_size_id,
+        	s.size_id,
+        	s.size_name
+        from items as i 
+        left join itemimages as g ON i.goods_id=g.goods_id
+        left join itemsizejunc  as j ON i.goods_id=j.junc_goods_id
+        left join itemsize  as s ON j.junc_size_id=s.size_id WHERE
+          <foreach collection="keywords" item="keyword" open="(" close=")" index="i" separator="" >
+	        <choose>
+	            <when test="i == 0">
+	                (i.shop_name LIKE '%${keyword}%')
+	            </when>
+	            <otherwise>
+	                OR (i.shop_name LIKE '%${keyword}%')
+	            </otherwise>
+	        </choose>
+	        </foreach>
+    </select>
+    
+    <select id="findItemById" resultMap="itemMap">
+    select 
+        	i.item_id,
+        	i.item_price,
+        	i.item_color,
+        	i.item_name,
+        	i.shop_name,
+        	i.item_description,
+        	i.goods_id,
+        	i.gender,
+        	i.deleted,
+        	i.stock_count,
+        	g.goods_id as image_goods_id,
+        	g.image_path as image_image_path,
+        	j.id as junc_id,
+        	j.junc_goods_id,
+        	j.junc_size_id,
+        	s.size_id,
+        	s.size_name
+        from items as i 
+        left join itemimages as g ON i.goods_id=g.goods_id
+        left join itemsizejunc  as j ON i.goods_id=j.junc_goods_id
+        left join itemsize  as s ON j.junc_size_id=s.size_id
+         WHERE item_id=#{itemId};
+    </select>
+    
+    
+    <insert id="insertItemToCart">
+    	insert into itemsincart(item_id,number_of_items,item_price,item_color,item_size,item_name,shop_name,user_id)
+    		values(#{itemId},#{numberOfItems},#{itemPrice},#{itemColor},#{itemSize},#{itemName},#{shopName},#{userId});
+    </insert>
+    
+    <update id="reduceStock">
+    	update items set stock_count = #{stockCount} where item_id = #{itemId};
+    </update>
+    
+    
+    
+ 
+</mapper>

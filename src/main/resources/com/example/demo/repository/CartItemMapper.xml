@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.CartItemMapper">
+
+
+ 	<resultMap type="com.example.demo.domain.CartItem" id="cartitemMap">
+        <result column="item_id" property="itemId"/>
+        <result column="number_of_items" property="numberOfItems"/>
+        <result column="item_price" property="itemPrice"/>
+        <result column="item_color" property="itemColor"/>
+        <result column="item_name" property="itemName"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="item_size" property="itemSize"/>
+        <result column="user_id" property="userId"/>
+        <collection property="itemimageslist" resultMap="itemimagesMap"></collection>
+	</resultMap>
+
+	<resultMap type="com.example.demo.domain.Itemimages" id="itemimagesMap">
+    	<result column="image_goods_id" property="goodsId"/>
+    	<result column="image_id" property="id"/>
+    	<result column="image_image_path" property="imagePath"/>
+    </resultMap>
+    
+     <resultMap type="com.example.demo.domain.ItemSize" id="itemsizeMap">
+    	<id column="size_id" property="sizeId"/>
+    	<result column="size_name" property="sizeName"/>
+    </resultMap>
+
+<select id="findCartItem" resultMap="cartitemMap">
+	select
+		c.item_id,
+		c.number_of_items,
+		c.item_price,
+		c.item_color,
+		c.item_name,
+		c.shop_name,
+		c.item_size,
+		c.user_id,
+		g.id as image_id,
+		g.goods_id as image_goods_id,
+		g.image_path as image_image_path
+	from itemsincart as c
+	left join itemimages as g on g.goods_id=c.item_id WHERE user_id = #{userId};
+</select>
+
+<select id="findCartItemByIdAndSize" resultMap="cartitemMap">
+	select
+		c.item_id,
+		c.number_of_items,
+		c.item_price,
+		c.item_color,
+		c.item_name,
+		c.shop_name,
+		c.item_size,
+		c.user_id,
+		g.id as image_id,
+		g.goods_id as image_goods_id,
+		g.image_path as image_image_path
+	from itemsincart as c
+	left join itemimages as g on g.goods_id=c.item_id
+	where c.item_id=#{itemId} and c.item_size=#{itemSize};
+</select>
+
+<update id="addNumberOfItem">
+	update 
+		itemsincart
+	set
+		number_of_items=#{numberOfItems}
+	where
+		item_id=#{itemId} and item_size=#{itemSize};
+</update>
+
+<delete id="deleteAllItemIncart">
+    	delete from itemsincart where user_id = #{userId};
+</delete>
+
+</mapper>

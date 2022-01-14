@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+#itemimage{
+	display:flex;
+	justify-content: center;
+  	align-items: center;
+  	padding-left: 10px;
+}
+
+div.btn-group{
+	border: solid 1px;
+	border-radius: 10px;
+	border-color:gray;
+	justify-content: center;
+  	align-items: center;
+}
+button.btn-outline-primary{
+	border: none;
+}
+
+.numberofitems{
+	display:flex;
+	justify-content: center;
+  	align-items: center;
+  	padding-left: 10px;
+}
+
+.display{
+	display:flex;
+	float:left;
+}
+
+
+div.forinline{
+	display: inline;
+}
+
+#name{
+}
+
+div.card{
+	justify-content: center;
+  	align-items: center;
+  	float:right;
+  	padding:0px;
+}
+
+div.rightmessage{
+	margin-right:0px;	
+	margin-left:0px;	
+}
+
+

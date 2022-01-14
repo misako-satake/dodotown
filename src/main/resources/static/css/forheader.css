@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+div.search-box{
+	display:flex;
+	background-color:white;
+	justify-content: center;
+  	align-items: center;
+  	padding-left: 10px;
+  	border-radius: 10px;
+	
+}
+#searchinput{
+	border: none;
+	border-radius: 10px;
+}

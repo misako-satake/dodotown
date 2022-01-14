@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<head lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+ <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<!-- Font Awesome -->
+<link type="text/css" rel="stylesheet"
+  	href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css" />
+	<link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
+<title>Insert title here</title>
+</head>
+<body>
+<span th:insert="/header/header::header"></span> 
+	<br>
+	
+<div class="container-fluid">
+		<form class="d-flex" th:action="@{/itemlist/searchByShop}">
+			<input class="form-control me-2" type="text" name="keywords" id="keywords"
+				placeholder="ブランド名を入力してください" aria-label="Search" >
+		</form>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript"
+	  src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript"
+	  src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/auto_complete.js}"></script>
+</body>
+</html>

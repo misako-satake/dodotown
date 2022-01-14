@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+
+div.carousel-item{
+	height: 400px;
+}
+div.underscreen{
+	display:flex;
+	margin-top:10px;
+	background-color:#f5f5f5;
+}
+
+div.con-left{
+	width:30%;
+}
+
+div.con-right{
+	width:70%;
+}

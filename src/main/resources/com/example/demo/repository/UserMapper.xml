@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.UserMapper">
+
+    <resultMap type="com.example.demo.domain.User" id="userMap">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="zipcode" property="zipcode"/>
+        <result column="address" property="address"/>
+        <result column="email_address" property="emailAddress"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+
+    <select id="findByUsers" resultType="com.example.demo.domain.User">
+        select id,user_id,gender,birthday,zipcode,address,email_address,password from users;
+    </select>
+    
+    <select id="findByUserIdAndPassword" resultMap="userMap">
+    	select id,user_id,gender,birthday,zipcode,address,email_address,password from users where email_address = #{emailAddress} AND password = #{password} 
+    </select>
+
+    <delete id="deleteUser">
+        delete from users where id = #{id};
+    </delete>
+    
+    <insert id="insertUser">
+    	insert into users(user_id,gender,birthday,zipcode,address,email_address,password)
+    	values(#{userId},#{gender},#{birthday},#{zipcode},#{address},#{emailAddress},#{password});
+    </insert>
+
+</mapper>

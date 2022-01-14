@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="ja" xmlns:th="http://www.thymeleaf.org">
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+ <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+ 	 <link rel="stylesheet" th:href="@{/css/forheader.css}">
+ 
+<title>Insert title here</title>
+
+ <link th:href="@{/css/foritemslist.css}" rel="stylesheet" />
+</head>
+<body>
+	<span th:insert="/header/header::header"></span> 
+	<br>
+ <div th:text="${resultzeromessage}"></div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+             <ul   th:each="item: ${allitemlist}">
+		        <div class="col">
+				<div class="card card-wrapper card-deck" style="width: 18rem;"> 
+	                <li class="card-body"  id="showitems">
+				          <span th:each="itemimage: ${item.itemimageslist}">
+			                <a th:href="@{'/itemlist/toItemDetail?itemId=' + ${item.itemId}}"  >
+								<img th:src="@{/image/} + ${itemimage.imagePath}"
+									class="img-responce img-rounded item-img-center card-img-top" width="200"
+									height="250"/>
+							</a>
+						  </span>
+					  <br>
+	                  <a th:text="${item.itemName}" id="itemname">じゃがバターベーコン</a><br/>
+	                  <!--  <a th:href="@{'/admiDetail?id=' + ${item.id}}"> 
+	                    </a>
+	                 -->
+	                  <span th:text="${#numbers.formatInteger(item.itemPrice,1,'COMMA')}" id="itemprice">2,380</span>円(税込)<br />
+	                  </li>
+		         </div>
+		         </div>
+         	 	</ul>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript"
+	  src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript"
+	  src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/localStrage.js}"></script>
+</body>
+</html>
